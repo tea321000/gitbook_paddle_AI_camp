@@ -6,4 +6,5 @@
 * [Day3-《青春有你2》选手数据分析](day3-qing-chun-you-ni-2-xuan-shou-shu-ju-fen-xi.md)
 * [Day4-《青春有你2》选手识别](day4-qing-chun-you-ni-2-xuan-shou-shi-bie.md)
 * [Day5- 综合大作业](day5-zong-he-da-zuo-ye.md)
+* [总结](zong-jie.md)
 
