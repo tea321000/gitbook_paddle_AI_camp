@@ -219,6 +219,14 @@ def crawl_pic_urls():
 
 ```
 
+这个程序有几个需要注意的点：一是我们爬取的链接是同一个域名的路由，可以理解成文件夹的相对路径，比如`C`盘下有`a b`两个文件夹，那命令行位于`C`盘根目录时可以使用`cd a`或者`cd b`进行访问，因此我们在这里必须将原`url`的域名拼接上我们的路由构成新的`url`；二是图册页面中的缩略图都是类似
+
+[https://bkimg.cdn.bcebos.com/pic/78310a55b319ebc47b9a62cc8d26cffc1f171680?x-bce-process=image/resize,m\_lfit,h\_160,limit\_1](https://bkimg.cdn.bcebos.com/pic/78310a55b319ebc47b9a62cc8d26cffc1f171680?x-bce-process=image/resize,m_lfit,h_160,limit_1)
+
+这样的形式，?后面其实表示我们对图片的大小缩放`resize`操作，因此只要将其去掉就可以通过缩略图的元素通过一张图片获取多张图片。
+
+另外此处暗藏一个大坑，假如爬取[王姝慧](https://baike.baidu.com/pic/%E7%8E%8B%E5%A7%9D%E6%85%A7/3177575/1/78310a55b319ebc47b9a62cc8d26cffc1f171680?fr=lemma&ct=single#aid=1&pic=78310a55b319ebc47b9a62cc8d26cffc1f171680)的百度百科图册时会发现她有38张图片，但http静态网页只会返回前30张的url，后面8张是通过JS进行动态加载的，而我们的request只能抓取静态网页不能渲染JS，因此我们是无法通过渲染JS的方式来获取这8张图片的。（当然，除了渲染JS的方法，还可以通过以类似异步请求接口逆向的方法进行获取，这在Day5的作业中也会用到）。由于时间关系，我这里也只是做了一个简单的`if`判断，没有再对后面8张图片进行爬取，而这会导致最终爬取的结果数量实际是不够的。
+
 ```python
 def down_pic(name,pic_urls):
     '''
@@ -241,6 +249,4 @@ def down_pic(name,pic_urls):
             print(e)
             continue
 ```
-
-此处
 
