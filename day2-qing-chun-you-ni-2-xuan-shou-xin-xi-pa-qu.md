@@ -53,6 +53,19 @@
 
 这个题目可以说对新人算是较为友好，爬虫程序的绝大部分已经给出，但其中类选择器以及爬取图片的第三部分需要自行完成：
 
+```bash
+#如果需要进行持久化安装, 需要使用持久化路径, 如下方代码示例:
+# !mkdir /home/aistudio/external-libraries
+# !pip install beautifulsoup4 -t /home/aistudio/external-libraries
+# !pip install lxml -t /home/aistudio/external-libraries
+```
+
+```python
+# 同时添加如下代码, 这样每次环境(kernel)启动的时候只要运行下方代码即可:
+import sys
+sys.path.append('/home/aistudio/external-libraries')
+```
+
 ### 一、爬取百度百科中《青春有你2》中所有参赛选手信息，返回页面数据
 
 ```python
@@ -249,4 +262,41 @@ def down_pic(name,pic_urls):
             print(e)
             continue
 ```
+
+
+
+### 四、打印爬取的所有图片的路径
+
+```python
+def show_pic_path(path):
+    '''
+    遍历所爬取的每张图片，并打印所有图片的绝对路径
+    '''
+    pic_num = 0
+    for (dirpath,dirnames,filenames) in os.walk(path):
+        for filename in filenames:
+           pic_num += 1
+           print("第%d张照片：%s" % (pic_num,os.path.join(dirpath,filename)))           
+    print("共爬取《青春有你2》选手的%d照片" % pic_num)
+```
+
+```python
+if __name__ == '__main__':
+
+     #爬取百度百科中《青春有你2》中参赛选手信息，返回html
+     html = crawl_wiki_data()
+
+     #解析html,得到选手信息，保存为json文件
+     parse_wiki_data(html)
+
+     #从每个选手的百度百科页面上爬取图片,并保存
+     crawl_pic_urls()
+
+     #打印所爬取的选手图片路径
+     show_pic_path('/home/aistudio/work/pics/')
+
+     print("所有信息爬取完成！")
+```
+
+最后这部分为打印爬取图片的路径，比较简单，这个程序的讲解到此为止。
 
