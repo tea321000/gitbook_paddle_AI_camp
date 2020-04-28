@@ -2,7 +2,7 @@
 
 **作业一：输出 9\*9 乘法口诀表\(注意格式\)**
 
-```text
+```python
  1*1=1   
  2*1=2   2*2=4   
  3*1=3   3*2=6   3*3=9   
@@ -14,7 +14,7 @@
  9*1=9   9*2=18  9*3=27  9*4=36  9*5=45  9*6=54  9*7=63  9*8=72  9*9=81 
 ```
 
-```text
+```python
 def table():
     #在这里写下您的乘法口诀表代码吧！
     print ('\n'.join('\t'.join(f'{i}*{j}={i*j}' for i in range(1,j+1)) for j in range(1,10)))
@@ -27,7 +27,7 @@ if __name__ == '__main__':
 
 使用列表生成式进行嵌套生成99乘法表，关键在于两层for之间用了一个\(\)括号相隔开，使用.join\(\)使得生成器generator返回值，接着用`f'{}'`大括号作为`i,j`值的占位符。假如没有使用.join\(\)，就没有那么简洁了：
 
-```text
+```python
 def table():
     #在这里写下您的乘法口诀表代码吧！
     print (*("" if row==0 else "\n" if col>=row+1 else f"{row}*{col}={row*col:<3}" for row in range(0, 10) for col in range(1, row+2)))
@@ -48,13 +48,13 @@ if __name__ == '__main__':
 
 按照序号、文件名分行打印输出。
 
-```text
+```python
 [1,'Day1-homework/26/26/new2020.txt'] 
 [2,'Day1-homework/18/182020.doc'] 
 [3,'Day1-homework/4/22/04:22:2020.txt']
 ```
 
-```text
+```python
 #导入OS模块
 import os
 #待搜索的目录路径
@@ -77,7 +77,7 @@ if __name__ == '__main__':
 
 这里也是故技重施，使用列表生成式利用os.walk\(\)函数生成结果的list，然后构造答案的输出格式进行输出。注意此处for和if的先后关系，上式也可以写成正常的循环形式：
 
-```text
+```python
 for files in os.walk(path):
     for file in files[2]:
         if filename in file:
